@@ -5,6 +5,11 @@ import Logo from '~/image/logo.png'
 import Learnmore from '~/modal/learnmore'
 import Showmore from '~/modal/showmore'
 import Parking from '~/image/icons8-parking-64.png'
+import { Disclosure,} from '@headlessui/react';
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ')
+}
 
 export default function Index() {
   const [learnmore, setLearMore] = useState(false)
@@ -85,16 +90,35 @@ export default function Index() {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between">
-                  <div className="px-2 py-3">
-                        <h1 className="text-xs">CHECK-IN</h1>
-                        <p className="text-sm font-light">10/10/2022</p>
-                  </div>
-                  <div className="px-3 py-5 mt-1 cursor-pointer">
-                    <Icon.BsChevronDown/>
-                  </div>
-              </div>
+              <dl className=" space-y-6 divide-y divide-gray-200 -mt-4">
+              <Disclosure as="div"  className="">
+                  {({ open }) => (
+                    <>
+                      <Disclosure.Button className="flex justify-between cursor-pointer ">
+                        <div className="mt-4 flex justify-between w-80 h-16 border focus:border-green-500 rounded-b-lg">
+                          <div className="px-2 py-4">
+                                <h1 className="text-xs">CHECK-IN</h1>
+                                <p className="text-sm font-light">10/10/2022</p>
+                          </div>
+                          <div className="px-3 py-5 mt-1 ml-48 cursor-pointer">
+                            <Icon.BsChevronDown  className={classNames(open ? 'rotate-180' : 'rotate-0', 'h-6 w-4 transform')}
+                              aria-hidden="true"
+                            />
+                          </div>
+                        </div>
+                      </Disclosure.Button>
+                      <Disclosure.Panel className='w-80 h-[350px] border border-gray bg-white rounder-lg px-3 py-4 absolute -ml-[1px] -mt-2 shadow-lg rounded-b-md'>
+                        <h1 className="">Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in...</h1>
+                      </Disclosure.Panel>
+                    </>
+                    )}
+              </Disclosure>
+              </dl>
+              
+    
             </div>
+
+            
           </div>
           <div className="flex justify-center mt-3">
             <button className="w-80 h-12 bg-rose-500 text-white rounded-lg">Reserve</button>

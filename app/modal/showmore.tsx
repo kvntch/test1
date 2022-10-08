@@ -30,3 +30,6 @@ const AddFolderModal = ({close}:props) => {
   )
 }
 export default AddFolderModal
+
+
+            
