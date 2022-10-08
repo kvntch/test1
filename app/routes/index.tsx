@@ -1,6 +1,7 @@
 import React from "react";
 import Profile from '~/image/profile.jpeg'
 import * as Icon from 'react-icons/bs'
+import Logo from '~/image/logo.png'
 
 import Parking from '~/image/icons8-parking-64.png'
 
@@ -116,6 +117,20 @@ export default function Index() {
             <p className="">$187</p>
           </div>
           
+        </div>
+        <div className="">
+          <div className="border rounded-xl w-96 h-32 px-4 mt-5">
+            <div className=" flex py-4 px-4">
+              <div className="w-3/4">
+                <h1 className=" mt-3">This is a rare find. <span className='font-light'>Mange Ram's place on Airbnb is usually fully booked.</span></h1>
+              </div>
+              <div className="1/4 ">
+                <div className="flex justify-center  py-4 ml-12">
+                  <img src={Logo} alt='' className="w-9 h-9"/>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
      
