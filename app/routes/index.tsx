@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Profile from '~/image/profile.jpeg'
 import * as Icon from 'react-icons/bs'
 import Logo from '~/image/logo.png'
-
+import Learnmore from '~/modal/learnmore'
+import Showmore from '~/modal/showmore'
 import Parking from '~/image/icons8-parking-64.png'
 
 export default function Index() {
+  const [learnmore, setLearMore] = useState(false)
+  const [showmore, setShowMore] = useState(false)
   return (
    <div className="flex justify-center px-12 py-12">
       <div className="w-2/3">
@@ -41,9 +44,10 @@ export default function Index() {
           <div className="font-bold">
             <h1 className="text-red-500 text-4xl">air<span className="text-black text-4xl">cover</span></h1>
           </div>
-            <h2 className="mt-4 mr-20 font-light">Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</h2>
-            <p className=" mt-3 underline font-semibold">Learn more</p>
+            <h2 className="mt-4 mr-20 font-light">Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in...</h2>
+            <p className=" mt-3 underline font-semibold cursor-pointer ease-in duration-300" onClick={()=> setLearMore(true)}>Learn more</p>
         </div>
+        {learnmore && <Learnmore close={() =>setLearMore(false)} />}
         <div className="mr-20">
             <div className="h-[1px] w-full bg-gray-400 mt-5 "></div>
         </div>
@@ -52,11 +56,12 @@ export default function Index() {
             monuments, lake, garden etc. Hauz Khas Village is a must visit for foreign and Indian tourists visiting Delhi. 
             There are many great restaurants and bars in vicinity. Being in HKV is an unforgettable experience which stays with you life long. 
             South Delhi is the BEST area in Delhi and Hauz Khas Village is in the midst of South Delhi. Nearest Metro Station is 1 KM, airport 15 km from my place.....</h1>
-            <p className=" mt-3 underline font-semibold">show more</p>
+            <p className=" mt-3 underline font-semibold cursor-pointer" onClick={()=> setShowMore(true)}>Show more</p>
         </div>
+        {showmore && <Showmore close={() =>setShowMore(false)} />}
       </div>
       <div className="1/3">
-        <div className="border-2 drop-shadow-lg py-5 px-4 w-96 h-[500px] rounded-xl ">
+        <div className="border-2  py-5 px-4 w-96 h-[500px] rounded-xl shadow-lg ">
           <div className=" flex justify-between px-4">
             <h1 className="text-2xl">$18 <span className="text-gray-500 text-base">night</span></h1>
             <div className="flex mt-2">
@@ -85,7 +90,7 @@ export default function Index() {
                         <h1 className="text-xs">CHECK-IN</h1>
                         <p className="text-sm font-light">10/10/2022</p>
                   </div>
-                  <div className="px-3 py-5 mt-1">
+                  <div className="px-3 py-5 mt-1 cursor-pointer">
                     <Icon.BsChevronDown/>
                   </div>
               </div>
