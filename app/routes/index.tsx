@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import Profile from '~/image/profile.jpeg'
 import * as Icon from 'react-icons/bs'
 import Logo from '~/image/logo.png'
@@ -6,6 +6,8 @@ import Learnmore from '~/modal/learnmore'
 import Showmore from '~/modal/showmore'
 import Parking from '~/image/icons8-parking-64.png'
 import { Disclosure,} from '@headlessui/react';
+import { Menu, Transition } from '@headlessui/react';
+
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -76,20 +78,37 @@ export default function Index() {
           </div>
           <div className="flex justify-center mt-5">
             <div className="w-80 h-32 border border-gray-400 rounded-lg">
-              <div className="flex rounded-tl-lg ">
-                <div className="w-40 h-16 border-b border-r border-gray-400">
-                  <div className=" px-2 py-3">
-                    <h1 className="text-xs">CHECK-IN</h1>
-                    <p className="text-sm font-light">10/10/2022</p>
+            <Menu as="div" className=" text-left cursor-pointer">
+                <Menu.Button className="flex rounded-tl-lg ">
+                  <div className="w-40 h-16 border-b border-r border-gray-400">
+                    <div className=" px-2 py-3">
+                      <h1 className="text-xs">CHECK-IN</h1>
+                      <p className="text-sm font-light">10/10/2022</p>
+                    </div>
                   </div>
-                </div>
-                <div className="w-40 h-16 border-b rounded-tr-lg border-gray-400">
-                  <div className="px-2 py-3">
-                    <h1 className="text-xs">CHECK-IN</h1>
-                    <p className="text-sm font-light">10/10/2022</p>
+                  <div className="w-40 h-16 border-b rounded-tr-lg border-gray-400">
+                    <div className="px-2 py-3">
+                      <h1 className="text-xs">CHECK-IN</h1>
+                      <p className="text-sm font-light">10/10/2022</p>
+                    </div>
                   </div>
-                </div>
-              </div>
+              </Menu.Button>
+                <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                >
+              <Menu.Items className="absolute w-[800px] h-[400px] divide-y divide-gray-100 border rounded-md bg-gray-400 right-20">
+                <h1 className="px-4 py-5">Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in...</h1>
+                 
+              </Menu.Items>
+                </Transition>
+            </Menu>
+
               <dl className=" space-y-6 divide-y divide-gray-200 -mt-4">
               <Disclosure as="div"  className="">
                   {({ open }) => (
@@ -100,9 +119,9 @@ export default function Index() {
                                 <h1 className="text-xs">CHECK-IN</h1>
                                 <p className="text-sm font-light">10/10/2022</p>
                           </div>
-                          <div className="px-3 py-5 mt-1 ml-48 cursor-pointer">
+                          <div className="px-3 py-5 mt-1 ml-48 cursor-pointer static">
                             <Icon.BsChevronDown  className={classNames(open ? 'rotate-180' : 'rotate-0', 'h-6 w-4 transform')}
-                              aria-hidden="true"
+                              aria-hidden="false"
                             />
                           </div>
                         </div>
@@ -121,7 +140,7 @@ export default function Index() {
             
           </div>
           <div className="flex justify-center mt-3">
-            <button className="w-80 h-12 bg-rose-500 text-white rounded-lg">Reserve</button>
+            <button className="w-80 h-12 bg-rose-500 text-white rounded-lg hover:bg-rose-600">Reserve</button>
           </div>
           <p className="flex justify-center mt-3 text-gray-500 font-light text-base">You won't be charged yet</p>
           <div className="px-4 mt-4">
