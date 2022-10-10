@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment} from "react";
 import Profile from '~/image/profile.jpeg'
 import * as Icon from 'react-icons/bs'
 import Logo from '~/image/logo.png'
@@ -7,14 +7,85 @@ import Showmore from '~/modal/showmore'
 import Parking from '~/image/icons8-parking-64.png'
 import { Disclosure,} from '@headlessui/react';
 import { Menu, Transition } from '@headlessui/react';
+import { AiOutlinePlusCircle} from "react-icons/ai";
 
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Index() {
+export type CounterProps = {
+  min?: number,
+  max?: number,
+  increment?: number,
+  decrement?: number,
+  min1?:number,
+  max1?: number,
+  min2?:number,
+  max2?: number,
+ 
+  onCountChange: (count: number) => void
+} & React.HTMLAttributes<HTMLDivElement>
+
+
+
+
+export default function Index({min = 1, 
+  min1 = 0, 
+  min2 = 0, 
+  max = 2,
+  max1 = 1,
+  max2 = 5,
+  increment = 1,
+  decrement = 1,
+  onCountChange}: CounterProps) {
+  
+  const [count, setCount] = useState(min)
+  const [count1, setCount1] = useState(min1)
+  const [count2, setCount2] = useState(min2)
+
+
+  function handleClickAdd() {
+    if (count < max) {
+      setCount(count + increment)
+      onCountChange(count + increment)
+    }
+  }
+  function handleClickSubtract() {
+    if (count > min) {
+      setCount(count - decrement)
+      onCountChange(count - decrement)
+    }
+  }
+
+  function handleAddChildren() {
+    if (count1 < max1) {
+      setCount1(count1 + increment)
+      onCountChange(count1 + increment)
+    }
+  }
+  function handleMinuschildren() {
+    if (count1 > min1) {
+      setCount1(count1 - decrement)
+      onCountChange(count1 - decrement)
+    }
+  }
+
+  function handleAddInfants() {
+    if (count2 < max2) {
+      setCount2(count2 + increment)
+      onCountChange(count2 + increment)
+    }
+  }
+  function handleMinusInfants() {
+    if (count2 > min2) {
+      setCount2(count2 - decrement)
+      onCountChange(count2 - decrement)
+    }
+  }
+  
   const [learnmore, setLearMore] = useState(false)
+  const [isOpen, setOpen] = useState(false)
   const [showmore, setShowMore] = useState(false)
   return (
     <div className="lg:flex lg:flex-row flex-col justify-center lg:px-12 px-5 py-12">
@@ -112,13 +183,14 @@ export default function Index() {
 
                 <dl className=" space-y-6 divide-y divide-gray-200 -mt-4">
                 <Disclosure as="div"  className="">
-                    {({ open }) => (
+                    {({ open}) => (
                       <>
                         <Disclosure.Button className="flex justify-between cursor-pointer ">
                           <div className="mt-4 flex justify-between w-80 h-16 border focus:border-green-500 rounded-b-lg">
-                            <div className="px-2 py-4">
-                                  <h1 className="text-xs">CHECK-IN</h1>
-                                  <p className="text-sm font-light">10/10/2022</p>
+                            <div className="px-2 py-4 w-80">
+                                  <h1 className="text-xs">GUESTS</h1>
+                                      <p className="text-sm font-light">{count} guests</p>
+                                     
                             </div>
                             <div className="px-3 py-5 mt-1 ml-48 cursor-pointer static">
                               <Icon.BsChevronDown  className={classNames(open ? 'rotate-180' : 'rotate-0', 'h-6 w-4 transform')}
@@ -127,9 +199,84 @@ export default function Index() {
                             </div>
                           </div>
                         </Disclosure.Button>
-                        <Disclosure.Panel className='w-80 h-[350px] border border-gray bg-white rounder-lg px-3 py-4 absolute -ml-[1px] -mt-2 shadow-lg rounded-b-md'>
-                          <h1 className="">Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in...</h1>
-                        </Disclosure.Panel>
+                        <Disclosure.Panel className='w-80 h-[400px] border border-gray bg-white rounder-lg px-3 py-4 absolute -ml-[1px] -mt-2 shadow-lg rounded-b-md'>
+                         <div className="flex flex-col">
+                            <div className="flex flex-row">
+                                  <div className="flex flex-col"> 
+                                    <p className="flex justify-start mt-3 text-black font-bold text-base">Adults</p>
+                                    <p className="flex justify-start text-black font-light text-xs">Age 13+</p>
+                                  </div>
+                                  <div className="flex flex-col mt-3 justify-center px-36">
+                                    <div className="flex flex-row">
+                                      <div className="h-[30px] w-[30px] border border-gray rounded-full flex justify-center cursor-pointer " onClick={handleClickSubtract}  >
+                                          <p className="text-xl">-</p>
+                                      </div>   
+                                      <p className="px-3 text-base flex justify-center mt-1 ">{count}</p>
+                                      <div className="bg-red h-[30px] w-[30px] border border-gray rounded-full flex justify-center cursor-pointer " onClick={handleClickAdd}  >
+                                          <p className="text-xl">+</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div className="flex flex-row py-2">
+                                  <div className="flex flex-col"> 
+                                    <p className="flex justify-start mt-3 text-black font-bold text-base">Children</p>
+                                    <p className="flex justify-start text-black font-light text-xs">Ages 2-12</p>
+                                  </div>
+                                  <div className="flex flex-col mt-3 justify-center px-32">
+                                    <div className="flex flex-row">
+                                      <div className="h-[30px] w-[30px] border border-gray rounded-full flex justify-center cursor-pointer " onClick={handleMinuschildren}  >
+                                          <p className="text-xl">-</p>
+                                      </div>   
+                                      <p className="px-3 text-base flex justify-center mt-1 ">{count1}</p>
+                                      <div className="bg-red h-[30px] w-[30px] border border-gray rounded-full flex justify-center cursor-pointer " onClick={handleAddChildren}  >
+                                          <p className="text-xl">+</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div className="flex flex-row py-2">
+                                  <div className="flex flex-col -mr-1"> 
+                                    <p className="flex justify-start mt-3 text-black font-bold text-base">Infants</p>
+                                    <p className="flex justify-start text-black font-light text-xs">Under 2</p>
+                                  </div>
+                                  <div className="flex flex-col mt-3 justify-center px-36">
+                                    <div className="flex flex-row">
+                                      <div className="h-[30px] w-[30px] border border-gray rounded-full flex justify-center cursor-pointer " onClick={handleMinusInfants}  >
+                                          <p className="text-xl">-</p>
+                                      </div>   
+                                      <p className="px-3 text-base flex justify-center mt-1 ">{count2}</p>
+                                      <div className="bg-red h-[30px] w-[30px] border border-gray rounded-full flex justify-center cursor-pointer " onClick={handleAddInfants}  >
+                                          <p className="text-xl">+</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div className="flex flex-row py-2">
+                                  <div className="flex flex-col mr-1"> 
+                                    <p className="flex justify-start mt-3 text-black font-bold text-base">Pets</p>
+                                    <p className="flex justify-start text-black text-xs font-bold underline underline-offset-2">Bringing a service animal?</p>
+                                  </div>
+                                  <div className="flex flex-col mt-3 justify-center pl-8">
+                                    <div className="flex flex-row">
+                                      <div className="h-[30px] w-[30px] border border-gray rounded-full flex justify-center cursor-not-allowed " >
+                                          <p className="text-xl text-slate-500">-</p>
+                                      </div>   
+                                      <p className="px-3 text-base flex justify-center mt-1 ">0</p>
+                                      <div className="h-[30px] text-slate-500 w-[30px] border border-gray rounded-full flex justify-center cursor-not-allowed" >
+                                          <p className="text-xl">+</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                              <p className="text-[11px] text-gray-500 mt-5">
+                              This place has a maximum of 2 guests, not including infants. Pets aren't allowed.
+                              </p>
+                              <div className="flex justify-end  mt-9 mr-3 cursor-pointer ">
+                              <p className="text-black text-md font-base underline underline-offset-2 ">Close</p>
+                              </div>
+                          </div>
+                          </Disclosure.Panel>
                       </>
                       )}
                 </Disclosure>
