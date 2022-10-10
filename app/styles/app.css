@@ -1127,8 +1127,34 @@ video {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
+<<<<<<< HEAD
 .hover\:rounded-lg:hover {
   border-radius: 0.5rem;
+=======
+.custom-container {
+  width: 100%;
+}
+
+.CalendarDay__selected_span {
+  background: #82e0aa;
+  color: white;
+  border: 1px solid lightred;
+}
+
+.CalendarDay__selected {
+  background: red;
+  color: white;
+}
+
+.CalendarDay__selected:hover {
+  background: orange;
+  color: white;
+}
+
+.CalendarDay__hovered_span:hover,
+  .CalendarDay__hovered_span {
+  background: brown;
+>>>>>>> initialcalendar
 }
 
 .hover\:bg-rose-600:hover {
