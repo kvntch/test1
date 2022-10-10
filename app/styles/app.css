@@ -1127,10 +1127,6 @@ video {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
-<<<<<<< HEAD
-.hover\:rounded-lg:hover {
-  border-radius: 0.5rem;
-=======
 .custom-container {
   width: 100%;
 }
@@ -1154,7 +1150,10 @@ video {
 .CalendarDay__hovered_span:hover,
   .CalendarDay__hovered_span {
   background: brown;
->>>>>>> initialcalendar
+}
+
+.hover\:rounded-lg:hover {
+  border-radius: 0.5rem;
 }
 
 .hover\:bg-rose-600:hover {
