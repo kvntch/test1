@@ -1,9 +1,12 @@
 import React, { useState, Fragment } from "react";
 import Profile from '~/image/profile.jpeg'
-import * as Icon from 'react-icons/bs'
+import {FiStar, FiChevronDown} from 'react-icons/fi'
+import {BsCalendar2Event} from 'react-icons/bs'
+import {AiFillStar} from 'react-icons/ai'
 import Logo from '~/image/logo.png'
 import Learnmore from '~/modal/learnmore'
 import Showmore from '~/modal/showmore'
+import Review from '~/modal/review'
 import Parking from '~/image/icons8-parking-64.png'
 import { Disclosure,} from '@headlessui/react';
 import { Menu, Transition } from '@headlessui/react';
@@ -16,6 +19,7 @@ function classNames(...classes: string[]) {
 export default function Index() {
   const [learnmore, setLearMore] = useState(false)
   const [showmore, setShowMore] = useState(false)
+  const [review, setReview] = useState(false)
   return (
     <div className="lg:flex lg:flex-row flex-col justify-center lg:px-12 px-5 py-12">
     
@@ -41,7 +45,7 @@ export default function Index() {
             </div>
               <p className="px-4 ml-9 text-gray-400 font-light">This is one of the few places int the area with free parking</p>
             <div className=" flex mt-8 mb-5">
-              <Icon.BsCalendar3 className="w-8 h-8"/>
+              <BsCalendar2Event className="w-8 h-8"/>
               <label className="mt-1 ml-4">Free Cancellation before Oct 11.</label>
             </div>
           </div>
@@ -73,10 +77,11 @@ export default function Index() {
             <div className=" flex justify-between px-4">
               <h1 className="text-2xl">$18 <span className="text-gray-500 text-base">night</span></h1>
               <div className="flex mt-2">
-                <Icon.BsStarFill className=" w-4 h-4"/>
-                <p className="text-sm  ml-1 ">4.42 <span className ='underline text-sm text-gray-500'>60 reviews</span></p>
+                <AiFillStar className=" w-4 h-4 mt-[1px]"/>
+                <p className="text-sm  ml-1 ">4.42 <span className ='underline text-sm text-gray-500 cursor-pointer' onClick={()=> setReview(true)}>60 reviews</span></p>
               </div>
             </div>
+            {review && <Review close={() =>setReview(false)} />}
             <div className="flex justify-center mt-5">
               <div className="w-80 h-32 border border-gray-400 rounded-lg">
               <Menu as="div" className=" text-left cursor-pointer">
@@ -121,7 +126,7 @@ export default function Index() {
                                   <p className="text-sm font-light">10/10/2022</p>
                             </div>
                             <div className="px-3 py-5 mt-1 ml-48 cursor-pointer static">
-                              <Icon.BsChevronDown  className={classNames(open ? 'rotate-180' : 'rotate-0', 'h-6 w-4 transform')}
+                              <FiChevronDown  className={classNames(open ? 'rotate-180' : 'rotate-0', 'h-6 w-4 transform')}
                                 aria-hidden="false"
                               />
                             </div>
