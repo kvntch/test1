@@ -1,4 +1,4 @@
-import React, { useState, Fragment} from "react";
+import React, { useState, Fragment, ReactNode} from "react";
 import Profile from '~/image/profile.jpeg'
 import {FiStar, FiChevronDown} from 'react-icons/fi'
 import {BsCalendar2Event} from 'react-icons/bs'
@@ -11,6 +11,10 @@ import Parking from '~/image/icons8-parking-64.png'
 import { Disclosure,} from '@headlessui/react';
 import { Menu, Transition } from '@headlessui/react';
 import { AiOutlinePlusCircle} from "react-icons/ai";
+import moment, { Moment } from 'moment'
+import 'react-dates/initialize'
+import 'react-dates/lib/css/_datepicker.css'
+import { DateRangePicker, FocusedInputShape } from 'react-dates'
 
 
 function classNames(...classes: string[]) {
@@ -91,6 +95,27 @@ export default function Index({min = 1,
   const [isOpen, setOpen] = useState(false)
   const [showmore, setShowMore] = useState(false)
   const [review, setReview] = useState(false)
+
+   const [startDate, setStartDate] = useState<Moment | null>(moment())
+  const [endDate, setEndDate] = useState<Moment | null>(null)
+  const [focusedInput, setFocusedInput] = useState<FocusedInputShape | null>(
+    null
+  )
+
+  const handlendDatesChange = (arg: {
+    startDate: moment.Moment | null
+    endDate: moment.Moment | null
+  }) => {
+    setStartDate(arg.startDate)
+    setEndDate(arg.endDate)
+  }
+
+  const handleFocusChange = (arg: FocusedInputShape | null) => {
+    setFocusedInput(arg)
+  }
+
+
+
   return (
     <div className="lg:flex lg:flex-row flex-col justify-center lg:px-12 px-5 py-12">
     
@@ -205,6 +230,7 @@ export default function Index({min = 1,
                           </div>
                         </Disclosure.Button>
                         <Disclosure.Panel className='w-80 h-[400px] border border-gray bg-white rounder-lg px-3 py-4 absolute -ml-[1px] -mt-2 shadow-lg rounded-b-md'>
+                        {({ close}) => (
                          <div className="flex flex-col">
                             <div className="flex flex-row">
                                   <div className="flex flex-col"> 
@@ -278,9 +304,10 @@ export default function Index({min = 1,
                               This place has a maximum of 2 guests, not including infants. Pets aren't allowed.
                               </p>
                               <div className="flex justify-end  mt-9 mr-3 cursor-pointer ">
-                              <p className="text-black text-md font-base underline underline-offset-2 ">Close</p>
+                              <p className="text-black text-md font-base underline underline-offset-2 " onClick={() =>close()}>Close</p>
                               </div>
                           </div>
+                           )}
                           </Disclosure.Panel>
                       </>
                       )}
