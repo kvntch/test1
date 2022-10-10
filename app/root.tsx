@@ -1,3 +1,4 @@
+import 'react-dates/initialize';
 import type { MetaFunction } from "@remix-run/node";
 import {
   Links,
@@ -9,8 +10,11 @@ import {
 } from "@remix-run/react";
 import styles from "./styles/app.css"
 
+import dates from 'react-dates/lib/css/_datepicker.css'
+
 export function links() {
-  return [{ rel: "stylesheet", href: styles }]
+  return [{ rel: "stylesheet", href: styles }, 
+  { rel: "stylesheet", href: dates }]
 }
 export const meta: MetaFunction = () => ({
   charset: "utf-8",

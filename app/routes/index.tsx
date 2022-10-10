@@ -1,3 +1,4 @@
+import 'react-dates/initialize';
 import React, { useState, Fragment} from "react";
 import Profile from '~/image/profile.jpeg'
 import * as Icon from 'react-icons/bs'
@@ -8,6 +9,11 @@ import Parking from '~/image/icons8-parking-64.png'
 import { Disclosure,} from '@headlessui/react';
 import { Menu, Transition } from '@headlessui/react';
 import { AiOutlinePlusCircle} from "react-icons/ai";
+import { Calendar, DateObject } from "react-multi-date-picker"
+import DatePicker from "react-multi-date-picker"
+import type{Value} from "react-multi-date-picker"
+import moment, { Moment } from 'moment'
+import { DateRangePicker, FocusedInputShape } from 'react-dates'
 
 
 function classNames(...classes: string[]) {
@@ -23,10 +29,8 @@ export type CounterProps = {
   max1?: number,
   min2?:number,
   max2?: number,
- 
   onCountChange: (count: number) => void
 } & React.HTMLAttributes<HTMLDivElement>
-
 
 
 
@@ -84,6 +88,25 @@ export default function Index({min = 1,
     }
   }
   
+  const [startDate, setStartDate] = useState<Moment | null>(moment())
+  const [endDate, setEndDate] = useState<Moment | null>(null)
+  const [focusedInput, setFocusedInput] = useState<FocusedInputShape | null>(
+    null
+  )
+
+  const handlendDatesChange = (arg: {
+    startDate: Moment | null
+    endDate: Moment | null
+  }) => {
+    setStartDate(arg.startDate)
+    setEndDate(arg.endDate)
+  }
+
+  const handleFocusChange = (arg: FocusedInputShape | null) => {
+    setFocusedInput(arg)
+  }
+
+  const [value, setValue] = useState<Value>(new Date());
   const [learnmore, setLearMore] = useState(false)
   const [isOpen, setOpen] = useState(false)
   const [showmore, setShowMore] = useState(false)
@@ -174,16 +197,31 @@ export default function Index({min = 1,
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                   >
-                <Menu.Items className="absolute w-[800px] h-[400px] divide-y divide-gray-100 border rounded-md bg-gray-400 right-20">
-                  <h1 className="px-4 py-5">Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in...</h1>
-                  
+                <Menu.Items className="absolute w-[800px] h-[400px] divide-y divide-gray-100 border rounded-md bg-white right-20">
+                    {/* <Calendar
+                   value={value}
+                  //  onChange={setDates}
+                   multiple
+                   numberOfMonths={2}
+                    // onChange={setValue}
+                    /> */}
+
+                  <DateRangePicker
+                    startDate={startDate} // moment.Moment | null;
+                    startDateId="your_unique_start_date_id" // moment.Moment | null;
+                    endDate={endDate} // momentPropTypes.momentObj or null,
+                    endDateId="your_unique_end_date_id" // string;
+                    onDatesChange={handlendDatesChange} // (arg: { startDate: moment.Moment | null; endDate: moment.Moment | null }) => void;
+                    focusedInput={focusedInput} // FocusedInputShape | null;
+                    onFocusChange={handleFocusChange} // (arg: FocusedInputShape | null) => void;
+                />
                 </Menu.Items>
                   </Transition>
               </Menu>
 
                 <dl className=" space-y-6 divide-y divide-gray-200 -mt-4">
                 <Disclosure as="div"  className="">
-                    {({ open}) => (
+                    {({ open }) => (
                       <>
                         <Disclosure.Button className="flex justify-between cursor-pointer ">
                           <div className="mt-4 flex justify-between w-80 h-16 border focus:border-green-500 rounded-b-lg">
@@ -192,14 +230,15 @@ export default function Index({min = 1,
                                       <p className="text-sm font-light">{count} guests</p>
                                      
                             </div>
-                            <div className="px-3 py-5 mt-1 ml-48 cursor-pointer static">
-                              <Icon.BsChevronDown  className={classNames(open ? 'rotate-180' : 'rotate-0', 'h-6 w-4 transform')}
+                            <div className="px-3 py-5 mt-1 ml-48 cursor-pointer static ">
+                              <Icon.BsChevronDown  className={classNames(open ? 'rotate-180' : 'rotate-0', 'h-6 w-4 transform') }  
                                 aria-hidden="false"
                               />
                             </div>
                           </div>
                         </Disclosure.Button>
                         <Disclosure.Panel className='w-80 h-[400px] border border-gray bg-white rounder-lg px-3 py-4 absolute -ml-[1px] -mt-2 shadow-lg rounded-b-md'>
+                        {({ close }) => (
                          <div className="flex flex-col">
                             <div className="flex flex-row">
                                   <div className="flex flex-col"> 
@@ -272,11 +311,11 @@ export default function Index({min = 1,
                               <p className="text-[11px] text-gray-500 mt-5">
                               This place has a maximum of 2 guests, not including infants. Pets aren't allowed.
                               </p>
-                              <div className="flex justify-end  mt-9 mr-3 cursor-pointer ">
-                              <p className="text-black text-md font-base underline underline-offset-2 ">Close</p>
+                              <div className="flex justify-end  mt-9 mr-3 cursor-pointer " onClick={() =>close()}  >
+                                <p className="text-black text-md font-base underline underline-offset-2 ">Close</p>
                               </div>
                           </div>
-                          </Disclosure.Panel>
+                        )}</Disclosure.Panel>
                       </>
                       )}
                 </Disclosure>
