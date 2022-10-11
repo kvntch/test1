@@ -2,7 +2,7 @@
 import 'react-dates/initialize';
 import React, { useState, Fragment} from "react";
 import Profile from '~/image/profile.jpeg'
-import {FiStar, FiChevronDown} from 'react-icons/fi'
+import {FiStar, FiChevronDown,  FiChevronUp} from 'react-icons/fi'
 import {BsCalendar2Event} from 'react-icons/bs'
 import {AiFillStar} from 'react-icons/ai'
 import Logo from '~/image/logo.png'
@@ -12,13 +12,16 @@ import Review from '~/modal/review'
 import Parking from '~/image/icons8-parking-64.png'
 import { Disclosure,} from '@headlessui/react';
 import { Menu, Transition } from '@headlessui/react';
-import { AiOutlinePlusCircle} from "react-icons/ai";
+// import { AiOutlinePlusCircle} from "react-icons/ai";
 // import { Calendar, DateObject } from "react-multi-date-picker"
 // import DatePicker from "react-multi-date-picker"
 // import type{Value} from "react-multi-date-picker"
 import moment, { Moment } from 'moment'
 import { DateRangePicker, FocusedInputShape } from 'react-dates'
 import { IconChevron } from '~/Icons';
+import Price from '~/modal/price';
+import Discount from '~/modal/discount';
+import Pets from '~/modal/pets';
 
 
 function classNames(...classes: string[]) {
@@ -116,6 +119,12 @@ export default function Index({min = 1,
   // const [isOpen, setOpen] = useState(false)
   const [showmore, setShowMore] = useState(false)
   const [review, setReview] = useState(false)
+  const [price, setPrice] = useState(false)
+  const [discount, setDiscount] = useState(false)
+  const [pets, setPets] = useState(false)
+
+
+
 
   //  const [startDate, setStartDate] = useState<Moment | null>(moment())
   // const [endDate, setEndDate] = useState<Moment | null>(null)
@@ -259,9 +268,7 @@ export default function Index({min = 1,
                                      
                             </div>
                             <div className="px-3 py-5 mt-1 ml-48 cursor-pointer static ">
-                              <IconChevron  className={classNames(open ? 'rotate-180' : 'rotate-0', 'h-6 w-4 transform') }  
-                                aria-hidden="false"
-                              />
+                              {open? <FiChevronDown />: <FiChevronUp/>}
                             </div>
                           </div>
                         </Disclosure.Button>
@@ -322,8 +329,9 @@ export default function Index({min = 1,
                               <div className="flex flex-row py-2">
                                   <div className="flex flex-col mr-1"> 
                                     <p className="flex justify-start mt-3 text-black font-bold text-base">Pets</p>
-                                    <p className="flex justify-start text-black text-xs font-bold underline underline-offset-2">Bringing a service animal?</p>
+                                    <p className="flex justify-start text-black text-xs font-bold underline underline-offset-2 cursor-pointer" onClick={()=> setPets(true)}>Bringing a service animal?</p>
                                   </div>
+
                                   <div className="flex flex-col mt-3 justify-center pl-8">
                                     <div className="flex flex-row">
                                       <div className="h-[30px] w-[30px] border border-gray rounded-full flex justify-center cursor-not-allowed " >
@@ -351,6 +359,7 @@ export default function Index({min = 1,
                 
       
               </div>
+              {pets && <Pets close={() =>setPets(false)} />}
 
               
             </div>
@@ -359,14 +368,18 @@ export default function Index({min = 1,
             </div>
             <p className="flex justify-center mt-3 text-gray-500 font-light text-base">You won't be charged yet</p>
             <div className="px-4 mt-4">
-              <div className="flex justify-between mt-2">
+              <div className="flex justify-between mt-2 cursor-pointer " onClick={()=> setPrice(true)}>
                 <h1 className="underline font-light">$20 x 9 nights</h1>
                 <h2 className=""> $182</h2>
               </div>
-              <div className="flex justify-between mt-2">
+          {price && <Price close={() => setPrice(false)} />}
+
+              <div className="flex justify-between mt-2 cursor-pointer" onClick={()=> setDiscount(true)}>
                 <h1 className="underline font-light">Weekly discount</h1>
                 <h2 className="text-green-900 font-light">-$18</h2>
               </div>
+          {discount && <Discount close={() =>setDiscount(false)} />}
+
               <div className="flex justify-between mt-2">
                 <h1 className="underline font-light">Service fee</h1>
                 <h2 className="">$23</h2>
