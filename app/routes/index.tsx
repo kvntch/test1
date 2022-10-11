@@ -1,6 +1,6 @@
 
 import 'react-dates/initialize';
-import React, { useState, Fragment} from "react";
+import React, { useState, Fragment, useReducer} from "react";
 import Profile from '~/image/profile.jpeg'
 import {FiStar, FiChevronDown,  FiChevronUp} from 'react-icons/fi'
 import {BsCalendar2Event} from 'react-icons/bs'
@@ -22,6 +22,17 @@ import { IconChevron } from '~/Icons';
 import Price from '~/modal/price';
 import Discount from '~/modal/discount';
 import Pets from '~/modal/pets';
+
+
+import ReactDOM from "react-dom";
+import { DateRangeInput } from "@datepicker-react/styled";
+import { ThemeProvider } from "styled-components";
+
+
+
+
+
+
 
 
 function classNames(...classes: string[]) {
@@ -96,23 +107,23 @@ export default function Index({min = 1,
     }
   }
   
-  const [startDate, setStartDate] = useState<Moment | null>(moment())
-  const [endDate, setEndDate] = useState<Moment | null>(null)
-  const [focusedInput, setFocusedInput] = useState<FocusedInputShape | null>(
-    null
-  )
+  // const [startDate, setStartDate] = useState<Moment | null>(moment())
+  // const [endDate, setEndDate] = useState<Moment | null>(null)
+  // const [focusedInput, setFocusedInput] = useState<FocusedInputShape | null>(
+  //   null
+  // )
 
-  const handlendDatesChange = (arg: {
-    startDate: Moment | null
-    endDate: Moment | null
-  }) => {
-    setStartDate(arg.startDate)
-    setEndDate(arg.endDate)
-  }
+  // const handlendDatesChange = (arg: {
+  //   startDate: Moment | null
+  //   endDate: Moment | null
+  // }) => {
+  //   setStartDate(arg.startDate)
+  //   setEndDate(arg.endDate)
+  // }
 
-  const handleFocusChange = (arg: FocusedInputShape | null) => {
-    setFocusedInput(arg)
-  }
+  // const handleFocusChange = (arg: FocusedInputShape | null) => {
+  //   setFocusedInput(arg)
+  // }
 
   // const [value, setValue] = useState<Value>(new Date());
   const [learnmore, setLearMore] = useState(false)
@@ -123,7 +134,22 @@ export default function Index({min = 1,
   const [discount, setDiscount] = useState(false)
   const [pets, setPets] = useState(false)
 
-
+  const initialState = {
+    startDate: null,
+    endDate: null,
+    focusedInput: null
+  };
+  
+  function reducer(state: any, action: { type: any; payload: any; }) {
+    switch (action.type) {
+      case "focusChange":
+        return { ...state, focusedInput: action.payload };
+      case "dateChange":
+        return action.payload;
+      default:
+        throw new Error();
+    }
+  }
 
 
   //  const [startDate, setStartDate] = useState<Moment | null>(moment())
@@ -144,7 +170,7 @@ export default function Index({min = 1,
   //   setFocusedInput(arg)
   // }
 
-
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <div className="lg:flex lg:flex-row flex-col justify-center lg:px-12 px-5 py-12">
@@ -210,7 +236,32 @@ export default function Index({min = 1,
             {review && <Review close={() =>setReview(false)} />}
             <div className="flex justify-center mt-5">
               <div className="w-80 h-32 border border-gray-400 rounded-lg">
-              <Menu as="div" className=" text-left cursor-pointer">
+              <ThemeProvider
+                  theme={{
+                    breakpoints: ["20em", "48em", "64em"],
+                    reactDatepicker: {
+                      daySize: [36, 40],
+                      fontFamily: "system-ui, -apple-system",
+                      colors: {
+                        accessibility: "#D80249",
+                        selectedDay: "#f7518b",
+                        selectedDayHover: "#F75D95",
+                        primaryColor: "#d8366f"
+                      }
+                    }
+                  }}
+                >
+                  <DateRangeInput
+                    onDatesChange={data => dispatch({ type: "dateChange", payload: data })}
+                    onFocusChange={focusedInput =>
+                      dispatch({ type: "focusChange", payload: focusedInput })
+                    }
+                    startDate={state.startDate} // Date or null
+                    endDate={state.endDate} // Date or null
+                    focusedInput={state.focusedInput} // START_DATE, END_DATE or null
+                  />
+                </ThemeProvider>
+              {/* <Menu as="div" className=" text-left cursor-pointer">
                   <Menu.Button className="flex rounded-tl-lg ">
                     <div className="w-40 h-16 border-b border-r border-gray-400">
                       <div className=" px-2 py-3">
@@ -234,7 +285,8 @@ export default function Index({min = 1,
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95"
                   >
-                <Menu.Items className="absolute w-[800px] h-[400px] divide-y divide-gray-100 border rounded-md bg-white right-20">
+                <Menu.Items className="absolute w-[800px] h-[400px] divide-y divide-gray-100 border rounded-md bg-white right-20"> */}
+              
                     {/* <Calendar
                    value={value}
                   //  onChange={setDates}
@@ -243,7 +295,7 @@ export default function Index({min = 1,
                     // onChange={setValue}
                     /> */}
 
-                  <DateRangePicker
+                  {/* <DateRangePicker
                     startDate={startDate} // moment.Moment | null;
                     startDateId="your_unique_start_date_id" // moment.Moment | null;
                     endDate={endDate} // momentPropTypes.momentObj or null,
@@ -251,10 +303,10 @@ export default function Index({min = 1,
                     onDatesChange={handlendDatesChange} // (arg: { startDate: moment.Moment | null; endDate: moment.Moment | null }) => void;
                     focusedInput={focusedInput} // FocusedInputShape | null;
                     onFocusChange={handleFocusChange} // (arg: FocusedInputShape | null) => void;
-                />
-                </Menu.Items>
+                /> */}
+                {/* </Menu.Items>
                   </Transition>
-              </Menu>
+              </Menu> */}
 
                 <dl className=" space-y-6 divide-y divide-gray-200 -mt-4">
                 <Disclosure as="div"  className="">
@@ -268,7 +320,7 @@ export default function Index({min = 1,
                                      
                             </div>
                             <div className="px-3 py-5 mt-1 ml-48 cursor-pointer static ">
-                              {open? <FiChevronDown />: <FiChevronUp/>}
+                              {open? <FiChevronUp />: <FiChevronDown/>}
                             </div>
                           </div>
                         </Disclosure.Button>
