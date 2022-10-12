@@ -15,7 +15,7 @@ import { Menu, Transition } from '@headlessui/react';
 // import { AiOutlinePlusCircle} from "react-icons/ai";
 // import { Calendar, DateObject } from "react-multi-date-picker"
 // import DatePicker from "react-multi-date-picker"
-// import type{Value} from "react-multi-date-picker"
+import type{Value} from "react-multi-date-picker"
 import moment, { Moment } from 'moment'
 import { DateRangePicker, FocusedInputShape } from 'react-dates'
 import { IconChevron } from '~/Icons';
@@ -107,25 +107,25 @@ export default function Index({min = 1,
     }
   }
   
-  // const [startDate, setStartDate] = useState<Moment | null>(moment())
-  // const [endDate, setEndDate] = useState<Moment | null>(null)
-  // const [focusedInput, setFocusedInput] = useState<FocusedInputShape | null>(
-  //   null
-  // )
+  const [startDate, setStartDate] = useState<Moment | null>(moment())
+  const [endDate, setEndDate] = useState<Moment | null>(null)
+  const [focusedInput, setFocusedInput] = useState<FocusedInputShape | null>(
+    null
+  )
 
-  // const handlendDatesChange = (arg: {
-  //   startDate: Moment | null
-  //   endDate: Moment | null
-  // }) => {
-  //   setStartDate(arg.startDate)
-  //   setEndDate(arg.endDate)
-  // }
+  const handlendDatesChange = (arg: {
+    startDate: Moment | null
+    endDate: Moment | null
+  }) => {
+    setStartDate(arg.startDate)
+    setEndDate(arg.endDate)
+  }
 
-  // const handleFocusChange = (arg: FocusedInputShape | null) => {
-  //   setFocusedInput(arg)
-  // }
+  const handleFocusChange = (arg: FocusedInputShape | null) => {
+    setFocusedInput(arg)
+  }
 
-  // const [value, setValue] = useState<Value>(new Date());
+   const [value, setValue] = useState<Value>(new Date());
   const [learnmore, setLearMore] = useState(false)
   // const [isOpen, setOpen] = useState(false)
   const [showmore, setShowMore] = useState(false)
@@ -170,7 +170,7 @@ export default function Index({min = 1,
   //   setFocusedInput(arg)
   // }
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  // const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <div className="lg:flex lg:flex-row flex-col justify-center lg:px-12 px-5 py-12">
@@ -236,31 +236,64 @@ export default function Index({min = 1,
             {review && <Review close={() =>setReview(false)} />}
             <div className="flex justify-center mt-5">
               <div className="w-80 h-32 border border-gray-400 rounded-lg">
-              <ThemeProvider
-                  theme={{
-                    breakpoints: ["20em", "48em", "64em"],
-                    reactDatepicker: {
-                      daySize: [36, 40],
-                      fontFamily: "system-ui, -apple-system",
-                      colors: {
-                        accessibility: "#D80249",
-                        selectedDay: "#f7518b",
-                        selectedDayHover: "#F75D95",
-                        primaryColor: "#d8366f"
-                      }
-                    }
-                  }}
-                >
-                  <DateRangeInput
-                    onDatesChange={data => dispatch({ type: "dateChange", payload: data })}
-                    onFocusChange={focusedInput =>
-                      dispatch({ type: "focusChange", payload: focusedInput })
-                    }
-                    startDate={state.startDate} // Date or null
-                    endDate={state.endDate} // Date or null
-                    focusedInput={state.focusedInput} // START_DATE, END_DATE or null
-                  />
-                </ThemeProvider>
+                  <div className="flex rounded-tl-lg ">
+                    <div className="w-40 h-16 border-b border-r border-gray-400">
+                      <div className=" px-2 py-3">
+                        <h1 className="text-xs">CHECK-IN</h1>
+                        
+                      </div>
+                    </div>
+                    <div className="w-40 h-16 border-b rounded-tr-lg border-gray-400 ">
+                      <div className="px-2 py-3">
+                        <h1 className="text-xs">CHECK-OUT</h1>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div className='-mt-9'>
+                   <DateRangePicker
+                    startDate={startDate} // moment.Moment | null;
+                    startDateId="your_unique_start_date_id" // moment.Moment | null;
+                    endDate={endDate} // momentPropTypes.momentObj or null,
+                    endDateId="your_unique_end_date_id" // string;
+                    onDatesChange={handlendDatesChange} // (arg: { startDate: moment.Moment | null; endDate: moment.Moment | null }) => void;
+                    focusedInput={focusedInput} // FocusedInputShape | null;
+                    onFocusChange={handleFocusChange} // (arg: FocusedInputShape | null) => void;
+                    /> 
+                </div>
+                <div className='mt-3'>
+                  {/* <ThemeProvider
+                      theme={{
+                        breakpoints: ["32em", "48em", "64em"],
+                        reactDatepicker: {
+                          daySize: [36, 40],
+                          
+                          fontFamily: "system-ui, -apple-system",
+                          colors: {
+                            accessibility: "rgb(17 24 39)",
+                            selectedDay: "rgb(156 163 175)",
+                            selectedDayHover: "rgb(156 163 175)",
+                            primaryColor: "rgb(17 24 39);"
+                            
+                          }
+                        }
+                      }}
+                    >
+                     
+                      <DateRangeInput 
+                        onDatesChange={data => dispatch({ type: "dateChange", payload: data })}
+                        onFocusChange={focusedInput =>
+                          dispatch({ type: "focusChange", payload: focusedInput })
+                        }
+                        startDate={state.startDate} // Date or null
+                        endDate={state.endDate} // Date or null
+                        focusedInput={state.focusedInput} // START_DATE, END_DATE or null
+                        startDateInputId ={'Check-in'}
+                        
+                      />
+                   
+                    </ThemeProvider> */}
+                    </div>
               {/* <Menu as="div" className=" text-left cursor-pointer">
                   <Menu.Button className="flex rounded-tl-lg ">
                     <div className="w-40 h-16 border-b border-r border-gray-400">

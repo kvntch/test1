@@ -8,14 +8,14 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import styles from "./styles/app.css"
 
 import dates from 'react-dates/lib/css/_datepicker.css'
-
+import styles from "./styles/app.css"
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }, 
-  { rel: "stylesheet", href: dates }]
+  return [
+  { rel: "stylesheet", href: dates },
+  { rel: "stylesheet", href: styles }, ]
 }
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
