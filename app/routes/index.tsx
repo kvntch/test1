@@ -22,7 +22,7 @@ import { IconChevron } from '~/Icons';
 import Price from '~/modal/price';
 import Discount from '~/modal/discount';
 import Pets from '~/modal/pets';
-
+import ServiceFee from '~/modal/serviceFee';
 
 import ReactDOM from "react-dom";
 import { DateRangeInput } from "@datepicker-react/styled";
@@ -127,7 +127,7 @@ export default function Index({min = 1,
 
    const [value, setValue] = useState<Value>(new Date());
   const [learnmore, setLearMore] = useState(false)
-  // const [isOpen, setOpen] = useState(false)
+  const[service, setService] = useState(false)
   const [showmore, setShowMore] = useState(false)
   const [review, setReview] = useState(false)
   const [price, setPrice] = useState(false)
@@ -465,10 +465,11 @@ export default function Index({min = 1,
               </div>
           {discount && <Discount close={() =>setDiscount(false)} />}
 
-              <div className="flex justify-between mt-2">
+              <div className="flex justify-between mt-2 cursor-pointer" onClick={()=> setService(true)}>
                 <h1 className="underline font-light">Service fee</h1>
                 <h2 className="">$23</h2>
               </div>
+              {service && <ServiceFee close={() =>setService(false)} />}
             </div>
             <div className="flex justify-center mt-2">
               <div className="h-[1px] w-80 bg-gray-400 mt-5 "></div>

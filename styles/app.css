@@ -403,11 +403,13 @@
 }
 .CalendarDay__hovered_start_first_possible_end {
   background: #eceeee;
-  border: 1px double #eceeee
+  border: 1px double #eceeee;
+  border-left: 1px !important;
 }
 .CalendarDay__hovered_start_blocked_min_nights {
   background: #eceeee;
   border: 1px double #e4e7e7
+  
 }
 .CalendarMonth {
   background: #fff;
