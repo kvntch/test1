@@ -2226,18 +2226,18 @@ video {
   direction: rtl
 }
 
-.DateRangePicker_picker__directionLeft {
-  left: -270px !important
+.DateRangePicker_picker__directionLeft{
+  left: -1px !important
 }
 
-@media (min-width: 300px )  {
+@media (min-width: 740px )  {
   .DateRangePicker_picker__directionLeft{
-    left: -1px !important
+    left: -270px !important
   }
 }
 
 .DateRangePicker_picker__directionRight {
-  right: auto
+  right: 200px !important
 }
 
 .DateRangePicker_picker__portal {
