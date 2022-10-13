@@ -113,6 +113,13 @@
   position: relative;
   display: inline-block
 }
+@media (min-width: 300px )  {
+  .SingleDatePicker {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+}
 .SingleDatePicker__block {
   display: block
 }
@@ -293,9 +300,19 @@
   cursor: pointer;
   font-size: 14px;
   text-align: center !important;
-  
   border: 2px solid
 }
+
+/* @media (min-width: 300px )  {
+  .CalendarDay {
+    cursor: pointer !important;
+    font-size: 14px;
+    text-align: center !important;
+    border: 2px solid !important;
+    flex-direction: column !important;
+    
+  }
+} */
 .CalendarDay:active {
   outline: 0
 }
@@ -420,6 +437,18 @@
   -ms-user-select: none;
   user-select: none
 }
+@media (min-width: 300px )  {
+  .CalendarMonth {
+    background: #fff !important;
+    text-align: center !important;
+    vertical-align: top !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    flex-direction: column !important;
+  }
+}
 .CalendarMonth_table {
   border-collapse: collapse;
   border-spacing: 0
@@ -443,6 +472,19 @@
   background: #fff;
   text-align: left;
   z-index: 0
+}
+
+@media (min-width: 300px )  {
+  .CalendarMonthGrid {
+    /* background: #fff !important;
+    text-align: center !important;
+    vertical-align: top !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important; */
+    flex-direction: column !important;
+  }
 }
 .CalendarMonthGrid__animating {
   z-index: 1
@@ -596,7 +638,7 @@
   height: 100%
 }
 .DayPicker__hidden {
-  visibility: hidden
+  visibility:visible
 }
 .DayPicker__withBorder {
   box-shadow: 0 2px 6px rgba(0,0,0,.05),0 0 0 1px rgba(0,0,0,.07);
@@ -663,11 +705,29 @@
   overflow: hidden;
   border-radius: 3px
 }
+@media (min-width: 300px )  {
+  .DayPicker_transitionContainer {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    flex-direction: column !important;
+  }
+  
+} 
 .DayPicker_transitionContainer__horizontal {
   -webkit-transition: height .2s ease-in-out;
   -moz-transition: height .2s ease-in-out;
   transition: height .2s ease-in-out
 }
+
+ @media (min-width: 300px )  {
+  .DayPicker_transitionContainer__vertical {
+    width: 100%;
+    flex-direction: column !important;
+    
+  }
+  
+} 
 .DayPicker_transitionContainer__vertical {
   width: 100%
 }
@@ -859,6 +919,8 @@
   position: relative;
   display: inline-block
 }
+
+
 .DateRangePicker__block {
   display: block
 }
@@ -872,6 +934,12 @@
 }
 .DateRangePicker_picker__directionLeft {
   left: -270px !important
+}
+@media (min-width: 300px )  {
+  .DateRangePicker_picker__directionLeft{
+    left: -1px !important
+}
+  
 }
 .DateRangePicker_picker__directionRight {
   right: auto
@@ -910,4 +978,7 @@
   height: 15px;
   width: 15px;
   fill: #cacccd
+}
+.style{
+  width: 100px !important;
 }

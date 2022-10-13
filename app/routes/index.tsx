@@ -23,10 +23,10 @@ import Price from '~/modal/price';
 import Discount from '~/modal/discount';
 import Pets from '~/modal/pets';
 import ServiceFee from '~/modal/serviceFee';
-
+import Cal from '~/modal/DateRangePicker'
 import ReactDOM from "react-dom";
-import { DateRangeInput } from "@datepicker-react/styled";
-import { ThemeProvider } from "styled-components";
+// import { DateRangeInput } from "@datepicker-react/styled";
+// import { ThemeProvider } from "styled-components";
 
 
 
@@ -113,6 +113,8 @@ export default function Index({min = 1,
     null
   )
 
+ 
+
   const handlendDatesChange = (arg: {
     startDate: Moment | null
     endDate: Moment | null
@@ -124,6 +126,7 @@ export default function Index({min = 1,
   const handleFocusChange = (arg: FocusedInputShape | null) => {
     setFocusedInput(arg)
   }
+  
 
    const [value, setValue] = useState<Value>(new Date());
   const [learnmore, setLearMore] = useState(false)
@@ -139,6 +142,8 @@ export default function Index({min = 1,
     endDate: null,
     focusedInput: null
   };
+
+  
   
   function reducer(state: any, action: { type: any; payload: any; }) {
     switch (action.type) {
@@ -235,7 +240,7 @@ export default function Index({min = 1,
             </div>
             {review && <Review close={() =>setReview(false)} />}
             <div className="flex justify-center mt-5">
-              <div className="w-80 h-32 border border-gray-400 rounded-lg">
+              <div className="w-80 h-32 border border-gray-400 rounded-lg ">
                   <div className="flex rounded-tl-lg ">
                     <div className="w-40 h-16 border-b border-r border-gray-400">
                       <div className=" px-2 py-3">
@@ -250,7 +255,7 @@ export default function Index({min = 1,
                       </div>
                     </div>
                   </div>
-                  <div className='-mt-9'>
+                  <div className='-mt-9 lg:block hidden'>
                    <DateRangePicker
                     startDate={startDate} // moment.Moment | null;
                     startDateId="your_unique_start_date_id" // moment.Moment | null;
@@ -259,7 +264,11 @@ export default function Index({min = 1,
                     onDatesChange={handlendDatesChange} // (arg: { startDate: moment.Moment | null; endDate: moment.Moment | null }) => void;
                     focusedInput={focusedInput} // FocusedInputShape | null;
                     onFocusChange={handleFocusChange} // (arg: FocusedInputShape | null) => void;
+                    numberOfMonths={2}
                     /> 
+                </div>
+                <div className='-mt-9 lg:hidden block'>
+                  <Cal/>
                 </div>
                 <div className='mt-3'>
                   {/* <ThemeProvider
@@ -340,7 +349,8 @@ export default function Index({min = 1,
                 {/* </Menu.Items>
                   </Transition>
               </Menu> */}
-
+            
+             
                 <dl className=" space-y-6 divide-y divide-gray-200 -mt-4">
                 <Disclosure as="div"  className="">
                     {({ open }) => (
