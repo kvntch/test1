@@ -25,6 +25,7 @@ import Pets from '~/modal/pets';
 import ServiceFee from '~/modal/serviceFee';
 import Cal from '~/modal/DateRangePicker'
 import ReactDOM from "react-dom";
+import { Link } from 'react-router-dom';
 // import { DateRangeInput } from "@datepicker-react/styled";
 // import { ThemeProvider } from "styled-components";
 
@@ -188,7 +189,9 @@ export default function Index({min = 1,
                 <p className="mt-2 text-gray-500 font-light"> 2 guests 1 bedroom 1 bed 1.5 baths</p>
               </div>
               <div className="lg:mr-10 lg:mt-0 mt-3">
+                <Link to ='./profile'>
                 <img src={Profile} alt="Profile" className=" rounded-full lg:w-16 w-[100px]"/>
+                </Link>
               </div>
             </div>
           </div>

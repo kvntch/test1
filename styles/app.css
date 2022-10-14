@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* body{
+  background-color: rgb(229 231 235);
+} */
 .custom-container {
     width: 250px !important;
   }
