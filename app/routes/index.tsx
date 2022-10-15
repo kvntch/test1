@@ -9,6 +9,7 @@ import Logo from '~/image/logo.png'
 import Learnmore from '~/modal/learnmore'
 import Showmore from '~/modal/showmore'
 import Review from '~/modal/review'
+import Button from '~/components/button'
 import Parking from '~/image/icons8-parking-64.png'
 import { Disclosure,} from '@headlessui/react';
 import { Menu, Transition } from '@headlessui/react';
@@ -192,8 +193,8 @@ export default function Index({min = 1,
               </div>
             </div>
           </div>
-            <div className="mr-20">
-              <div className="h-[1px] w-full bg-gray-400 mt-5 "></div>
+            <div className="mr-5 lg:mr-20">
+              <div className="h-[1px] w-full bg-gray-400 mt-5"></div>
             </div>
           <div className="mt-5">
             <div className=" flex">
@@ -459,7 +460,7 @@ export default function Index({min = 1,
               
             </div>
             <div className="flex justify-center mt-3">
-              <button className="w-80 h-12 bg-rose-500 text-white rounded-lg hover:bg-rose-600">Reserve</button>
+            <Button size="lg" textColor="white" bgColor="red">Reserve</Button>
             </div>
             <p className="flex justify-center mt-3 text-gray-500 font-light text-base">You won't be charged yet</p>
             <div className="px-4 mt-4">

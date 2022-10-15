@@ -11,7 +11,7 @@ const ServiceFee = ({close}:props) => {
        
   return (
       
-    <div className=''>
+    <div className='animate-pulse flex space-x-4'>
         <div className='absolute inset-0  flex justify-center items-center transition ease-in duration-300 ml-80 mb-32'>
             <div className='flex flex-row py-2 px-5 bg-white rounded-lg  text-sm w-[450px] h-[80px] border'>
                 <div className='flex justify-start mt-3  text-black cursor-pointer'onClick={close}>
